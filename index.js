@@ -78,6 +78,18 @@ async function run() {
         const updatedBooking = await bookingCollection.updateOne(filter, updatedDoc);
         res.send(updatedBooking);
       })
+      //admin order
+      app.post("/deleteOrder", async (req, res) => {
+        const userID = await req.body.UserId;
+        await bookingCollection.deleteOne({ _id: ObjectId(userID) });
+  
+        res.json("Deleted!");
+      });
+      app.get("/manageAllOrders", async (req, res) => {
+        const allUserOrders = await bookingCollection.find({}).toArray();
+  
+        res.send(allUserOrders);
+      });
     //item get
     app.get('/item', async (req, res) => {
         const query = {};
