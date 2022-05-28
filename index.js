@@ -95,7 +95,7 @@ async function run() {
         const id = await req.body.id;
   
         const filter = { _id: ObjectId(id) };
-        await orderCollection.updateOne(filter, { $set: { status: status } });
+        await bookingCollection.updateOne(filter, { $set: { status: status } });
   
         res.json("updated");
       });
