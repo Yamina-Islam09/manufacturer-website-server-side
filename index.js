@@ -85,7 +85,7 @@ async function run() {
   
         res.json("Deleted!");
       });
-      app.get("/manageAllOrders", async (req, res) => {
+      app.get("/manageAllOrders",verifyJWT,verifyAdmin, async (req, res) => {
         const allUserOrders = await bookingCollection.find({}).toArray();
   
         res.send(allUserOrders);
