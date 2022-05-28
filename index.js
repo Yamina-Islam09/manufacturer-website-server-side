@@ -90,6 +90,15 @@ async function run() {
   
         res.send(allUserOrders);
       });
+      app.post("/updateStatus", async (req, res) => {
+        const status = await req.body.status;
+        const id = await req.body.id;
+  
+        const filter = { _id: ObjectId(id) };
+        await orderCollection.updateOne(filter, { $set: { status: status } });
+  
+        res.json("updated");
+      });
     //item get
     app.get('/item', async (req, res) => {
         const query = {};
