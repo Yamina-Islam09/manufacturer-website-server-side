@@ -188,34 +188,8 @@ async function run() {
         const users = await userCollection.find().toArray();
         res.send(users);
       });
-//optional
-      app.put('/user/:id', async(req, res) =>{
-        const id = req.params.id;
-        const updatedUser = req.body;
-        const filter = {_id: ObjectId(id)};
-        const options = { upsert: true };
-        const updatedDoc = {
-            $set: {
-                name: updatedUser.name,
-                email: updatedUser.email
-            }
-        };
-        const result = await userCollection.updateOne(filter, updatedDoc, options);
-        res.send(result);
 
-    })
-    //real user update
-    app.put('/users/profile', verifyJWT, async (req, res) => {
-      const data = req.body;
-      const filter = { email: data.email };
-      const options = { upsert: true };
-      const updateDoc = {
-          $set: data,
-      }
-      const result = await userCollection.updateOne(filter, updateDoc, options);
-      res.send(result);
-  })
-      //only admin have power to show users
+   
       app.get('/admin/:email', async (req, res) => {
         const email = req.params.email;
         const user = await userCollection.findOne({ email: email });
