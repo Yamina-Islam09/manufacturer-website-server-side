@@ -205,7 +205,7 @@ async function run() {
 
     })
     //real user update
-    app.put('/users/profile', verifyUser, async (req, res) => {
+    app.put('/users/profile', verifyJWT, async (req, res) => {
       const data = req.body;
       const filter = { email: data.email };
       const options = { upsert: true };
