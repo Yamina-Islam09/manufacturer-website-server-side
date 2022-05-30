@@ -29,7 +29,7 @@ function verifyJWT(req, res, next) {
     });
   }
 
-//total kaj
+
 async function run() {
     try {
       await client.connect();
